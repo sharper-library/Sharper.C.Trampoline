@@ -1,0 +1,14 @@
+{ "version": "0.1.0-*"
+, "description": "A unit type."
+, "authors": [ "Jeremy Hughes" ]
+, "projectUrl": "https://github.com/sharper-library/Sharper.C.Trampoline"
+, "licenseUrl": "https://raw.githubusercontent.com/sharper-library/Sharper.C.Trampoline/master/LICENSE.txt"
+
+, "frameworks":
+  { "dotnet":
+    { "dependencies":
+      { "System.Runtime": "4.0.20"
+      }
+    }
+  }
+}
