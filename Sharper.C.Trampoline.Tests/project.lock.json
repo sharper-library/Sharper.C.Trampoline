@@ -1,0 +1,262 @@
+{
+  "locked": false,
+  "version": 1,
+  "targets": {
+    "DNX,Version=v4.5.1": {
+      "FsCheck/2.1.0": {
+        "dependencies": {
+          "FSharp.Core": "3.1.2.5"
+        },
+        "compile": {
+          "lib/net45/FsCheck.dll": {}
+        },
+        "runtime": {
+          "lib/net45/FsCheck.dll": {}
+        }
+      },
+      "FSharp.Core/4.0.0.1": {
+        "compile": {
+          "lib/net40/FSharp.Core.dll": {}
+        },
+        "runtime": {
+          "lib/net40/FSharp.Core.dll": {}
+        }
+      },
+      "Fuchu/1.0.1.0": {
+        "dependencies": {
+          "FSharp.Core": "3.1.2.1"
+        },
+        "compile": {
+          "lib/Fuchu.dll": {}
+        },
+        "runtime": {
+          "lib/Fuchu.dll": {}
+        }
+      },
+      "Fuchu.FsCheck/1.0.1.0": {
+        "dependencies": {
+          "FsCheck": "2.1.0",
+          "FSharp.Core": "3.1.2.5",
+          "Fuchu": "1.0.1.0"
+        },
+        "compile": {
+          "lib/Fuchu.FsCheck.dll": {}
+        },
+        "runtime": {
+          "lib/Fuchu.FsCheck.dll": {}
+        }
+      },
+      "Sharper.C.Function/0.1.0-build-00002": {
+        "dependencies": {
+          "Sharper.C.Unit": "0.1.0-build-00004"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Sharper.C.Function.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Sharper.C.Function.dll": {}
+        }
+      },
+      "Sharper.C.Test.Arbitrary/0.1.0-build-00003": {
+        "dependencies": {
+          "FsCheck": "2.2.1",
+          "Sharper.C.Function": "0.1.0-build-00002"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Sharper.C.Test.Arbitrary.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Sharper.C.Test.Arbitrary.dll": {}
+        }
+      },
+      "Sharper.C.Test.Property/0.1.0-build-00004": {
+        "dependencies": {
+          "Fuchu.FsCheck": "1.0.1",
+          "Sharper.C.Function": "0.1.0-build-00002"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Sharper.C.Test.Property.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Sharper.C.Test.Property.dll": {}
+        }
+      },
+      "Sharper.C.Unit/0.1.0-build-00004": {
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Sharper.C.Unit.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Sharper.C.Unit.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "FsCheck/2.1.0": {
+      "sha512": "yg47Psh/ZyD9F+N8HjJ9Q6UU/A9Oz1xu9frfdspyEtD660Pk+v96uch9wwMZfvrhtgSTatgInI8G9SkqNEZofA==",
+      "files": [
+        "FsCheck.2.1.0.nupkg",
+        "FsCheck.2.1.0.nupkg.sha512",
+        "FsCheck.nuspec",
+        "lib/net45/FsCheck.dll",
+        "lib/net45/FsCheck.pdb",
+        "lib/net45/FsCheck.XML",
+        "lib/portable-net45+netcore45/FsCheck.dll",
+        "lib/portable-net45+netcore45/FsCheck.pdb",
+        "lib/portable-net45+netcore45/FsCheck.XML",
+        "lib/portable-net45+netcore45+wp8/FsCheck.dll",
+        "lib/portable-net45+netcore45+wp8/FsCheck.pdb",
+        "lib/portable-net45+netcore45+wp8/FsCheck.XML",
+        "lib/portable-net45+netcore45+wpa81+wp8/FsCheck.dll",
+        "lib/portable-net45+netcore45+wpa81+wp8/FsCheck.pdb",
+        "lib/portable-net45+netcore45+wpa81+wp8/FsCheck.XML"
+      ]
+    },
+    "FSharp.Core/4.0.0.1": {
+      "sha512": "lNtlbbJ5hP8LEd7nKtTUiGEpLmHLWiU39x+0jq4rmRWG7Mgj6vYm+gmTOhtwpiPFX8j8zUsfLyA8AC7dZY75LQ==",
+      "files": [
+        "FSharp.Core.4.0.0.1.nupkg",
+        "FSharp.Core.4.0.0.1.nupkg.sha512",
+        "FSharp.Core.nuspec",
+        "lib/net20/FSharp.Core.dll",
+        "lib/net20/FSharp.Core.optdata",
+        "lib/net20/FSharp.Core.sigdata",
+        "lib/net20/FSharp.Core.xml",
+        "lib/net40/FSharp.Core.dll",
+        "lib/net40/FSharp.Core.optdata",
+        "lib/net40/FSharp.Core.sigdata",
+        "lib/net40/FSharp.Core.xml",
+        "lib/portable-net45+monoandroid10+monotouch10+xamarinios10/FSharp.Core.dll",
+        "lib/portable-net45+monoandroid10+monotouch10+xamarinios10/FSharp.Core.optdata",
+        "lib/portable-net45+monoandroid10+monotouch10+xamarinios10/FSharp.Core.sigdata",
+        "lib/portable-net45+monoandroid10+monotouch10+xamarinios10/FSharp.Core.xml",
+        "lib/portable-net45+netcore45/FSharp.Core.dll",
+        "lib/portable-net45+netcore45/FSharp.Core.optdata",
+        "lib/portable-net45+netcore45/FSharp.Core.sigdata",
+        "lib/portable-net45+netcore45/FSharp.Core.xml",
+        "lib/portable-net45+netcore45+wp8/FSharp.Core.dll",
+        "lib/portable-net45+netcore45+wp8/FSharp.Core.optdata",
+        "lib/portable-net45+netcore45+wp8/FSharp.Core.sigdata",
+        "lib/portable-net45+netcore45+wp8/FSharp.Core.xml",
+        "lib/portable-net45+netcore45+wpa81+wp8/FSharp.Core.dll",
+        "lib/portable-net45+netcore45+wpa81+wp8/FSharp.Core.optdata",
+        "lib/portable-net45+netcore45+wpa81+wp8/FSharp.Core.sigdata",
+        "lib/portable-net45+netcore45+wpa81+wp8/FSharp.Core.xml",
+        "lib/portable-net45+sl5+netcore45/FSharp.Core.dll",
+        "lib/portable-net45+sl5+netcore45/FSharp.Core.optdata",
+        "lib/portable-net45+sl5+netcore45/FSharp.Core.sigdata",
+        "lib/portable-net45+sl5+netcore45/FSharp.Core.xml"
+      ]
+    },
+    "Fuchu/1.0.1.0": {
+      "sha512": "pqd44uYepdFUI23/GaBY5jC0YXEB1m8CquyE5xTLFVbmbph9R9Dxo1RpqqS4iyOe30CAcRQSqa5yNoVQyCBmNg==",
+      "files": [
+        "Fuchu.1.0.1.nupkg",
+        "Fuchu.1.0.1.nupkg.sha512",
+        "Fuchu.nuspec",
+        "lib/Fuchu.dll",
+        "lib/Fuchu.pdb",
+        "lib/Fuchu.XML"
+      ]
+    },
+    "Fuchu.FsCheck/1.0.1.0": {
+      "sha512": "AqygEFPionZHsuqec/s4c44FSC4AFNRtr92ZYKn+FuuBXvmVV/blj/tnF2ZYOObGieuUcd2ermqw6vXRd3Ec0w==",
+      "files": [
+        "Fuchu.FsCheck.1.0.1.nupkg",
+        "Fuchu.FsCheck.1.0.1.nupkg.sha512",
+        "Fuchu.FsCheck.nuspec",
+        "lib/Fuchu.FsCheck.dll",
+        "lib/Fuchu.FsCheck.pdb",
+        "lib/Fuchu.FsCheck.XML"
+      ]
+    },
+    "Sharper.C.Function/0.1.0-build-00002": {
+      "sha512": "lqZzqYkvNCbH5QLpo18HO1I20AJ7+0jGdwyY2E97n2WnP+LUzQCfM+DEWTgpd3yXBnW11bmyJYcUcpjLBxXoyw==",
+      "files": [
+        "lib/dnx451/Sharper.C.Function.dll",
+        "lib/dnx451/Sharper.C.Function.xml",
+        "lib/dotnet/Sharper.C.Function.dll",
+        "lib/dotnet/Sharper.C.Function.xml",
+        "lib/net451/Sharper.C.Function.dll",
+        "lib/net451/Sharper.C.Function.xml",
+        "Sharper.C.Function.0.1.0-build-00002.nupkg",
+        "Sharper.C.Function.0.1.0-build-00002.nupkg.sha512",
+        "Sharper.C.Function.nuspec"
+      ]
+    },
+    "Sharper.C.Test.Arbitrary/0.1.0-build-00003": {
+      "sha512": "9nfxnCxLZZHxp5w2b1v10iFb5wojib1Lnp1OUFJ58lMkC5cYWQh3aPVQPNvonbrFs6LGrNn+hsR0QMlpbXGk4g==",
+      "files": [
+        "lib/dnx451/Sharper.C.Test.Arbitrary.dll",
+        "lib/dnx451/Sharper.C.Test.Arbitrary.xml",
+        "lib/dotnet/Sharper.C.Test.Arbitrary.dll",
+        "lib/dotnet/Sharper.C.Test.Arbitrary.xml",
+        "lib/net451/Sharper.C.Test.Arbitrary.dll",
+        "lib/net451/Sharper.C.Test.Arbitrary.xml",
+        "Sharper.C.Test.Arbitrary.0.1.0-build-00003.nupkg",
+        "Sharper.C.Test.Arbitrary.0.1.0-build-00003.nupkg.sha512",
+        "Sharper.C.Test.Arbitrary.nuspec"
+      ]
+    },
+    "Sharper.C.Test.Property/0.1.0-build-00004": {
+      "sha512": "jHoxHsdtF4/znHfTwi4/r9gpbOyvubckA8dMGfzAcKh9FZh7GDOrcQe/1svcz8ew21v4+aPkh59J1HzfJ49Sjg==",
+      "files": [
+        "lib/dnx451/Sharper.C.Test.Property.dll",
+        "lib/dnx451/Sharper.C.Test.Property.xml",
+        "lib/net451/Sharper.C.Test.Property.dll",
+        "lib/net451/Sharper.C.Test.Property.xml",
+        "Sharper.C.Test.Property.0.1.0-build-00004.nupkg",
+        "Sharper.C.Test.Property.0.1.0-build-00004.nupkg.sha512",
+        "Sharper.C.Test.Property.nuspec"
+      ]
+    },
+    "Sharper.C.Unit/0.1.0-build-00004": {
+      "sha512": "0GVcJVe6Ml/HiDs6H9EW4qJ2CHmxkWKZpM84ZtP/4f7sCJQLCxQJzal+moQcszIUaHxjWC7TTcsdzDDcjPaPVw==",
+      "files": [
+        "lib/dnx451/Sharper.C.Unit.dll",
+        "lib/dnx451/Sharper.C.Unit.xml",
+        "lib/dotnet/Sharper.C.Unit.dll",
+        "lib/dotnet/Sharper.C.Unit.xml",
+        "lib/net451/Sharper.C.Unit.dll",
+        "lib/net451/Sharper.C.Unit.xml",
+        "Sharper.C.Unit.0.1.0-build-00004.nupkg",
+        "Sharper.C.Unit.0.1.0-build-00004.nupkg.sha512",
+        "Sharper.C.Unit.nuspec"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    "": [
+      "Sharper.C.Trampoline ",
+      "Sharper.C.Test.Arbitrary >= 0.1.0-*",
+      "Sharper.C.Test.Property >= 0.1.0-*",
+      "FSharp.Core >= 4.0.0.1",
+      "FsCheck >= 2.1.0"
+    ],
+    "DNX,Version=v4.5.1": []
+  }
+}

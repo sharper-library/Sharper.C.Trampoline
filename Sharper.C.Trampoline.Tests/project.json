@@ -1,0 +1,22 @@
+{ "version": "0.1.0-*"
+, "description": "Trampoline tests"
+, "authors": [ "Jeremy Hughes" ]
+, "projectUrl": "https://github.com/sharper-library/Sharper.C.Trampoline"
+, "licenseUrl": "https://raw.githubusercontent.com/sharper-library/Sharper.C.Trampoline/master/LICENSE.txt"
+
+, "commands":
+  { "Sharper.C.Trampoline.Tests": "Sharper.C.Control.Tests.Trampoline"
+  }
+
+, "dependencies":
+  { "Sharper.C.Trampoline": ""
+  , "Sharper.C.Test.Arbitrary": "0.1.0-*"
+  , "Sharper.C.Test.Property": "0.1.0-*"
+  , "FSharp.Core": "4.0.0.1"
+  , "FsCheck": "2.1.0"
+  }
+
+, "frameworks":
+  { "dnx451": { }
+  }
+}
