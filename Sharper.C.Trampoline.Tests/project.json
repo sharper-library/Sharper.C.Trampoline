@@ -5,7 +5,7 @@
 , "licenseUrl": "https://raw.githubusercontent.com/sharper-library/Sharper.C.Trampoline/master/LICENSE.txt"
 
 , "commands":
-  { "Sharper.C.Trampoline.Tests": "Sharper.C.Control.Tests.Trampoline"
+  { "test": "run"
   }
 
 , "dependencies":
