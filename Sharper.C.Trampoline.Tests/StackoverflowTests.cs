@@ -34,12 +34,52 @@ public static class StackoverflowTests
     }
 }
 
+public static class StepSeqTests
+{
+    [Tests]
+    public static Test Tests
+    =>
+        nameof(StepSeq<int>)
+        .Group
+          ( IsMonad(AnyInt)
+          , "Iterates".WithoutOverflow(() => Iterate(0, n => n + 1))
+          );
+
+    public static Test IsMonad<A>(Arbitrary<A> arbA)
+      where A : IEquatable<A>
+    =>
+        MonadLaws.For
+          ( a => Yield(a, End<A>())
+          , f => fa => fa.Map(f)
+          , f => fa => fa.FlatMap(f)
+          , (s1, s2) => s1.Eval().SequenceEqual(s1.Eval())
+          , AnyStepSeq(arbA)
+          , AnyFunc1<A, StepSeq<A>>(AnyStepSeq(arbA))
+          , AnyFunc1<A, A>(arbA)
+          , arbA
+          );
+
+    public static Test WithoutOverflow<A>(this string label, Func<StepSeq<A>> f)
+    =>
+        label.Group
+          ( Test.Case("Build computation", () => f())
+          , Test.Case("Evaluate computation", () => f().Eval().Skip(1000000))
+          );
+
+    public static Arbitrary<StepSeq<A>> AnyStepSeq<A>(Arbitrary<A> arbA)
+    =>
+        AnySeq(arbA).Convert
+          ( xs => xs.Aggregate(End<A>(), (s, a) => Yield(a, s))
+          , s => s.Eval()
+          );
+}
+
 public static class StepTests
 {
     [Tests]
     public static Test Tests
     =>
-        "Step Tests"
+        nameof(Step<int>)
         .Group
           ( IsMonad(AnyInt)
 
@@ -66,13 +106,6 @@ public static class StepTests
     =>
         arbA.Convert(Done, s => s.Eval());
 
-    public static Test Iterates
-    =>
-        Test.Case
-          ( "Iterates (without stack overflow)"
-          , () => Iterate(0, n => n + 1).Eval().Skip(1000000)
-          );
-
     public static Test IsMonad<A>(Arbitrary<A> arbA)
       where A : IEquatable<A>
     =>
@@ -90,8 +123,8 @@ public static class StepTests
     public static Test WithoutOverflow<A>(this string label, Func<Step<A>> f)
     =>
         label.Group
-          ( Test.Case("Build computation", () => {Console.WriteLine("BUILD"); f();})
-          , Test.Case("Evaluate computation", () => {Console.WriteLine("EVAL"); Console.WriteLine(f().Eval());})
+          ( Test.Case("Build computation", () => f())
+          , Test.Case("Evaluate computation", () => f().Eval())
           );
 
     private static Step<int> IterateSuspend(int target = 1000000, int n = 0)
@@ -119,18 +152,16 @@ public static class StepTests
 
 public sealed class Program
 {
+    public static Test[] Tests
+    =>
+        new[]
+        { StepTests.Tests
+        , StepSeqTests.Tests
+        };
+
     public int Main(string[] args)
-    {
-        try
-        {
-        return StepTests.Tests.Run();
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e.StackTrace);
-            return 1;
-        }
-    }
+    =>
+        Tests.Run();
 }
 
 }

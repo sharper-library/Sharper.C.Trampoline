@@ -10,6 +10,10 @@ public static class StepSeqModule
     =>
         new DoneCase<A>();
 
+    public static StepSeq<A> End<A>(A a)
+    =>
+        new YieldCase<A>(a, new DoneCase<A>());
+
     public static StepSeq<A> Suspend<A>(Func<StepSeq<A>> k)
     =>
         new SuspendCase<A>(k);
@@ -33,6 +37,20 @@ public static class StepSeqModule
     public static StepSeq<A> Iterate<A>(A a, Func<A, A> f)
     =>
         Suspend(() => Yield(a, Iterate(f(a), f)));
+
+    private static Func<A, StepSeq<B>> Fix<A, B>
+      ( Func<Func<A, StepSeq<B>>, Func<A, StepSeq<B>>> f
+      , uint n
+      , uint max
+      )
+    =>
+        x =>
+            f
+              ( n == 0
+                ? a => Suspend(() => Fix(f, max, max)(a))
+                : Fix(f, n - 1, max)
+              )
+              (x);
 
     public abstract class StepSeq<A>
     {
