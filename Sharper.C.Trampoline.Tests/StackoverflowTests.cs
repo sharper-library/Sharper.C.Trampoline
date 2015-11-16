@@ -7,17 +7,17 @@ using Sharper.C.Testing.Laws;
 namespace Sharper.C.Tests
 {
 
-using static Testing.PropertyModule;
-using static Control.StepModule;
-using static Control.StepSeqModule;
-using static Test.SystemArbitraryModule;
 using Fuchu;
+using static Control.StepModule;
+using static Data.ChainModule;
+using static Testing.PropertyModule;
+using static Test.SystemArbitraryModule;
 
 public static class StackoverflowTests
 {
     public static IEnumerable<int> Nats
     =>
-        Iterate(0, n => n + 1).Eval();
+        IterateChain(0, n => n + 1).Eval();
 
     public static int NthNat(int n)
     =>
@@ -34,44 +34,62 @@ public static class StackoverflowTests
     }
 }
 
-public static class StepSeqTests
+public static class ChainTests
 {
     [Tests]
     public static Test Tests
     =>
-        nameof(StepSeq<int>)
+        nameof(Chain<int>)
         .Group
           ( IsMonad(AnyInt)
-          , "Iterates".WithoutOverflow(() => Iterate(0, n => n + 1))
+          , "Iterates".WithoutOverflow(() => IterateChain(0, n => n + 1))
           );
 
     public static Test IsMonad<A>(Arbitrary<A> arbA)
       where A : IEquatable<A>
     =>
         MonadLaws.For
-          ( a => Yield(a, End<A>())
+          ( LastLink
           , f => fa => fa.Map(f)
           , f => fa => fa.FlatMap(f)
           , (s1, s2) => s1.Eval().SequenceEqual(s1.Eval())
-          , AnyStepSeq(arbA)
-          , AnyFunc1<A, StepSeq<A>>(AnyStepSeq(arbA))
+          , AnyChain(arbA)
+          , AnyFunc1<A, Chain<A>>(AnyChain(arbA))
           , AnyFunc1<A, A>(arbA)
           , arbA
           );
 
-    public static Test WithoutOverflow<A>(this string label, Func<StepSeq<A>> f)
+    public static Test WithoutOverflow<A>(this string label, Func<Chain<A>> f)
     =>
         label.Group
           ( Test.Case("Build computation", () => f())
           , Test.Case("Evaluate computation", () => f().Eval().Skip(1000000))
           );
 
-    public static Arbitrary<StepSeq<A>> AnyStepSeq<A>(Arbitrary<A> arbA)
+    public static Arbitrary<Chain<A>> AnyChain<A>(Arbitrary<A> arbA)
     =>
         AnySeq(arbA).Convert
-          ( xs => xs.Aggregate(End<A>(), (s, a) => Yield(a, s))
+          ( xs => xs.Aggregate(EndChain<A>(), (s, a) => YieldLink(a, s))
           , s => s.Eval()
           );
+
+    public static Gen<Chain<A>> Sequence<A>(Chain<Gen<A>> xs)
+    =>
+        xs.Eval().FoldRight
+          ( Gen.Constant(EndChain<A>())
+          , (ga, x) =>
+                x.Map
+                  ( gsa =>
+                        from sa in gsa
+                        from a in ga
+                        select YieldLink(a, sa)
+                  )
+          )
+        .Eval();
+
+    public static Gen<IEnumerable<A>> Sequence<A>(IEnumerable<Gen<A>> xs)
+    =>
+        Sequence(xs.ToChain()).Select(sa => sa.Eval());
 }
 
 public static class StepTests
@@ -156,7 +174,7 @@ public sealed class Program
     =>
         new[]
         { StepTests.Tests
-        , StepSeqTests.Tests
+        , ChainTests.Tests
         };
 
     public int Main(string[] args)

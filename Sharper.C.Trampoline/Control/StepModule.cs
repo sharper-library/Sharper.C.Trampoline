@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Sharper.C.Control
 {
@@ -19,13 +20,9 @@ public static partial class StepModule
     =>
         new SuspendCase<A>(k);
 
-    public static Step<A> Defer<A>(Step<A> x)
+    public static MemoStep<A> MemoizeStep<A>(Step<A> x)
     =>
-        new LazyCase<A>(x);
-
-    public static LazyStep<A> Thunk<A>(Step<A> x)
-    =>
-        new LazyStep<A>(x);
+        new MemoStep<A>(x);
 
     public static Func<A, Step<B>> Fix<A, B>
       ( Func<Func<A, Step<B>>, Func<A, Step<B>>> f
@@ -40,21 +37,6 @@ public static partial class StepModule
       )
     =>
         a => Fix(f, max, max)(a).Eval();
-
-    public static Step<B> Select<A, B>
-      ( this Step<A> ta
-      , Func<A, B> f
-      )
-    =>
-        ta.Map(f);
-
-    public static Step<C> SelectMany<A, B, C>
-      ( this Step<A> ta
-      , Func<A, Step<B>> f
-      , Func<A, B, C> g
-      )
-    =>
-        ta.FlatMap(a => f(a).Map(b => g(a, b)));
 
     private static Func<A, Step<B>> Fix<A, B>
       ( Func<Func<A, Step<B>>, Func<A, Step<B>>> f
@@ -92,6 +74,14 @@ public static partial class StepModule
         public Step<B> Map<B>(Func<A, B> f)
         =>
             FlatMap(a => Done(f(a)));
+
+        public Step<B> Select<B>(Func<A, B> f)
+        =>
+            Map(f);
+
+        public Step<C> SelectMany<B, C>(Func<A, Step<B>> f, Func<A, B, C> g)
+        =>
+            FlatMap(a => f(a).Map(b => g(a, b)));
 
         public bool IsDone
         =>
@@ -169,41 +159,41 @@ public static partial class StepModule
             Cont().FlatMap(k);
     }
 
-    private sealed class LazyCase<A>
-      : Step<A>
+    // private sealed class LazyCase<A>
+    //   : Step<A>
+    // {
+    //     public Step<A> Comp { get; private set; }
+
+    //     public LazyCase(Step<A> comp)
+    //     {
+    //         Comp = comp;
+    //     }
+
+    //     public override Step<B> FlatMap<B>(Func<A, Step<B>> f)
+    //     =>
+    //         new FlatMapCase<A, B>(Next, f);
+
+    //     public override Step<A> Next
+    //     {
+    //         get
+    //         {
+    //             var a = Comp.Eval();
+    //             Comp = Done(a);
+    //             return Comp;
+    //         }
+    //     }
+
+    //     internal override Step<B> FlatMapNext<B>(Func<A, Step<B>> k)
+    //     =>
+    //         Next.FlatMap(k);
+    // }
+
+    public sealed class MemoStep<A>
     {
         // TODO make this a thread-safe Box<Step<A>>
-        public Step<A> Comp { get; private set; }
-
-        public LazyCase(Step<A> comp)
-        {
-            Comp = comp;
-        }
-
-        public override Step<B> FlatMap<B>(Func<A, Step<B>> f)
-        =>
-            new FlatMapCase<A, B>(Next, f);
-
-        public override Step<A> Next
-        {
-            get
-            {
-                var a = Comp.Eval();
-                Comp = Done(a);
-                return Comp;
-            }
-        }
-
-        internal override Step<B> FlatMapNext<B>(Func<A, Step<B>> k)
-        =>
-            Next.FlatMap(k);
-    }
-
-    public sealed class LazyStep<A>
-    {
         private Step<A> comp;
 
-        internal LazyStep(Step<A> comp)
+        internal MemoStep(Step<A> comp)
         {
             this.comp = comp;
         }
