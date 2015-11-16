@@ -5,7 +5,7 @@ function AllProjects() {
 }
 
 function PackageProjects() {
-    AllProjects | Where {$_.Directory.Name -notmatch $TestsRegex}
+    AllProjects # | Where {$_.Directory.Name -notmatch $TestsRegex}
 }
 
 function TestProjects() {
