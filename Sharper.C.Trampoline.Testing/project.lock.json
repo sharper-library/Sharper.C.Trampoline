@@ -157,7 +157,8 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "Sharper.C.Trampoline.Testing "
+      "Sharper.C.Trampoline ",
+      "Sharper.C.Testing >= 0.1.0-*"
     ],
     "DNX,Version=v4.5.1": []
   }

@@ -1,0 +1,15 @@
+{ "version": "0.1.0-*"
+, "description": "Arbitraries and Laws for Sharper.C.Trampoline"
+, "authors": [ "Jeremy Hughes" ]
+, "projectUrl": "https://github.com/"
+, "licenseUrl": "https://raw.githubusercontent.com//master/LICENSE.txt"
+
+, "dependencies":
+  { "Sharper.C.Trampoline": ""
+  , "Sharper.C.Testing": "0.1.0-*"
+  }
+
+, "frameworks":
+  { "dnx451": { }
+  }
+}
